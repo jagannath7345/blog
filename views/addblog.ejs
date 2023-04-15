@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Bloging</title>
+    <%-include('./partials/header.ejs')%>
+    </head>
+    <body>
+      <%-include('./partials/navbar.ejs')%>
+        <div class="container mt-3 col-lg-6">
+          <form action="/blog" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+              <label for="title" class="form-label">Title
+              </label>
+              <input type="text" name="title" class="form-control"
+                id="title" placeholder="title">
+            </div>
+            <div class="mb-3">
+              <label for="content" class="form-label">Content
+              </label>
+              <textarea class="form-control" id="content" name="body"
+                rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="image" class="form-label">Cover Image
+              </label>
+              <input type="file" name="coverImageURL" class="form-control">
+            </div>
+            <div class="mb-3">
+              <button class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+        <%-include('./partials/script.ejs')%>
+
+        </body>
+      </html>
