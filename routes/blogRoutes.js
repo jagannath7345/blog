@@ -25,22 +25,27 @@ const upload = multer({ storage: stroage });
 router.post("/", upload.single("coverImageURL"), addBlog);
 router.get("/:id", async (req, res) => {
   const userBlog = await Blog.findById(req.params.id).populate("createdBy");
-  const comments = await Comment.find({blogId: req.params.id }).populate("createdBy")
-  console.log(comments)
+  const comments = await Comment.find({ blogId: req.params.id }).populate(
+    "createdBy"
+  );
+  console.log(comments);
   return res.render("blog", {
     user: req.user,
     blog: userBlog,
-    comments
+    comments,
   });
 });
 
 router.post("/comment/:blogId", async (req, res) => {
-   await Comment.create({
+  await Comment.create({
     content: req.body.content,
     blogId: req.params.blogId,
     createdBy: req.user._id,
   });
   return res.redirect(`/blog/${req.params.blogId}`);
 });
-
+router.get("/delete/:id", async (req, res) => {
+  await Blog.findByIdAndDelete(req.params.id);
+  return res.redirect("/");
+});
 module.exports = router;
